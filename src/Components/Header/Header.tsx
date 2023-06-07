@@ -23,8 +23,7 @@ const Header = () => {
          </div>
          <div className="header__profile">
             {user.autorise ? <NavLink to='profile'>{user.name}</NavLink> : <NavLink to='login'>Login</NavLink>}
-
-            <NavLink to='logout'>Logout</NavLink>
+            {user.autorise && <NavLink to='logout'>Logout</NavLink>}
             {!user.autorise && <NavLink to='register'>register</NavLink>}
          </div>
 

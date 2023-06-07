@@ -86,8 +86,6 @@ instanse.interceptors.response.use(
 );
 
 
-
-
 export const postApi = {
    async getPosts() {
       try {
@@ -105,7 +103,6 @@ export const postApi = {
          return error
       }
    },
-
    // async addPost(title, author, excerpt, content, status = "published", slug = title + date.getSeconds()) {
    //    const responce = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug }))
    //    return responce
@@ -118,11 +115,11 @@ export const postApi = {
 }
 
 export const userApi = {
-   async register(email: string, user_name: string, password: any) {
+   async register(email: string, user_name: string, password: string | number) {
       const response = await (instanse.post(`user/register/`, { email, user_name, password }));
       return response.data;
    },
-   async login(email: string, password: any) {
+   async login(email: string, password: string | number) {
       const response = await (instanse.post(`token/`, { email, password }))
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
