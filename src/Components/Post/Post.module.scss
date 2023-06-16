@@ -1,0 +1,27 @@
+.post{
+   width: calc(33.33% - 10px);
+   height: 200px;
+   border: 1px solid white;
+   border-radius: 20px;
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   row-gap: 20px;
+   a{
+      font-size: 25px;
+      text-decoration: none;
+      color: black;
+      transition: 0.3s;
+      &:hover{
+         color: white;
+         transform: scale(1.05);
+      }
+   }
+   button{
+      width: 50%;
+      margin: 0 auto;
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 5px 10px;
+   }
+}

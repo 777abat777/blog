@@ -1,0 +1,24 @@
+.sideBar{
+   position: absolute;
+   right: 1%;
+   top: 100px;
+   width: 15%;
+   min-height: 80vh;
+   margin-left: auto;
+   background-color: #595959;
+   border-radius: 20px;
+   text-align: center;
+   padding: 20px;
+   a{
+      display: inline-block;
+      font-size: 25px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      &:hover{
+         color: black;
+         transform: scale(1.05);
+         color:black;
+      }
+   }
+}
