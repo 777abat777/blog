@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { PostType, PostsStateInterface, ResponseData } from './TypesPostSlice'
+import { PostType, PostsStateInterface, ResponseData } from '../../Types/PostTypes'
 import { postApi } from '../../API/api'
-// import { usersApi } from "../../api/api"
-// import { ResponseData, TypeFetchUsersArguments, TypeFollowToggleTunkArguments, UsersStateInterface } from './TypesUserSlice'
+
 
 const initialState: PostsStateInterface = {
    posts: [],
@@ -12,80 +11,26 @@ const initialState: PostsStateInterface = {
 }
 
 export const fetchPosts = createAsyncThunk(
-   'users/fetchUsers',
-   async (requestdata, { rejectWithValue }) => {
+   'posts/fetchPosts',
+   async (_, { rejectWithValue, dispatch }) => {
       const response: any = await postApi.getPosts()
       if (response.status !== 200) {
          return rejectWithValue(`Server error ${response.message}`)
       }
       const data: Array<PostType> = await response.data
-      return data
+      dispatch(setPosts(data))
+
    }
 )
-// export const followToggleTunk = createAsyncThunk<any, TypeFollowToggleTunkArguments, { rejectValue: string }>(
-//    'users/folloToggleTunk',
-//    async (requestdata, { rejectWithValue, dispatch }) => {
-//       let { id, followCase } = requestdata
-//       dispatch(followingUsers(id))
-//       if (followCase === "follow") {
-//          const response = await usersApi.followRequest(id)
-//          if (response.status !== 200) {
-//             return rejectWithValue(`Server error ${response.message}`)
-//          }
-//          const data = await response.data
-//          dispatch(follow(id))
-//          dispatch(followingSucces(id))
-//          return data
-//       }
-//       if (followCase === "unfollow") {
-//          const response = await usersApi.unfollowRequest(id)
-//          if (response.status !== 200) {
-//             console.log(response)
-//             return rejectWithValue(`Server error ${response.message}`)
-//          }
-//          const data = await response.data
-//          dispatch(unFollow(id))
-//          dispatch(followingSucces(id))
-//          return data
-//       }
-//    }
-// )
+
 
 export const PostsSlice = createSlice({
    name: 'posts',
    initialState,
    reducers: {
-      // follow: (state, action: PayloadAction<number>) => {
-      //    state.users.map(user => {
-      //       if (user.id === action.payload) {
-      //          return user.followed = true
-      //       }
-      //       return user
-      //    })
-      // },
-      // unFollow: (state, action: PayloadAction<number>) => {
-      //    state.users.map(user => {
-      //       if (user.id === action.payload) {
-      //          return user.followed = false
-      //       }
-      //       return user
-      //    })
-      // },
-      // setUsersTotalCount: (state, action: PayloadAction<number>) => {
-      //    state.totalUserCount = action.payload
-      // },
-      // changePage: (state, action: PayloadAction<number>) => {
-      //    state.currentPage = action.payload
-      // },
-      // resetPage: (state) => {
-      //    state.currentPage = 1
-      // },
-      // followingUsers: (state, action: PayloadAction<number>) => {
-      //    state.followingUsers.push(action.payload)
-      // },
-      // followingSucces: (state, action: PayloadAction<number>) => {
-      //    state.followingUsers = state.followingUsers.filter((el) => el !== action.payload)
-      // }
+      setPosts: (state, action) => {
+         state.posts = action.payload
+      }
    },
    extraReducers(builder) {
       builder
@@ -94,24 +39,18 @@ export const PostsSlice = createSlice({
             state.error = null
          })
          .addCase(fetchPosts.fulfilled, (state, action) => {
-            state.posts = action.payload
             state.loading = false
+            state.error = null
+
          })
-      // .addCase(fetchPosts.rejected, (state, action) => {
-      //    state.error = action.payload
-      //    state.loading = false
-      // })
-      // .addCase(followToggleTunk.pending, (state) => {
-      // })
-      // .addCase(followToggleTunk.fulfilled, (state, action) => {
-
-      // })
-      // .addCase(followToggleTunk.rejected, (state, action) => {
-
-      // })
+         .addCase(fetchPosts.rejected, (state, action) => {
+            state.error = action.error
+            state.loading = false
+            console.log(state.error)
+         })
    },
 }
 )
 
-// export const { setUsersTotalCount, changePage, resetPage, follow, unFollow, followingUsers, followingSucces } = PostsSlice.actions
+export const { setPosts } = PostsSlice.actions
 export default PostsSlice.reducer

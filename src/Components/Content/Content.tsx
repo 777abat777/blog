@@ -11,23 +11,16 @@ const Content = () => {
 
    let dispatch = useAppDispatch()
    let posts = useAppSelector(state => state.postReducer.posts)
-
-   const postsNew = posts.filter((post) => post.category === "new")
-   console.log(postsNew)
-
+   const postsNew = posts?.filter((post) => post.category === "new")
 
    useEffect(() => {
-      // component mount
       dispatch(fetchPosts())
-      return () => {
-         // Anything in here is fired on component unmount.
-      }
+
    }, [dispatch])
 
 
    return (
       <div>
-         {/* {posts ? posts.map((post) => <Post title={post.title} key={post.id} id={post.id} slug={post.slug} />) : <h1>loading</h1>} */}
          <Routes>
             <Route path='/new' element={<New posts={postsNew} />} />
             <Route path='/new/:slug' element={<SinglePost />} />

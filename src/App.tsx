@@ -18,18 +18,15 @@ import { setUser } from './Redux/UserSlice/UserSlice';
 
 
 function App() {
-   let user = useAppSelector(state => state.userReducer)
    let userAutorise = useAppSelector(state => state.userReducer.autorise)
    let dispatch = useAppDispatch()
    useEffect(() => {
       if (!userAutorise) {
          if (localStorage.length > 1) {
             let access: any = localStorage.getItem('access_token')
-            let refresh = localStorage.getItem('refresh_token');
             instanse.defaults.headers['Authorization'] =
                'JWT ' + localStorage.getItem('access_token');
             let myDecodedToken: any = decodeToken(access);
-            console.log(myDecodedToken)
             dispatch(setUser({
                autorise: true,
                name: myDecodedToken.name,

@@ -121,10 +121,12 @@ export const userApi = {
       return response.data;
    },
    async login(email: string, password: string | number) {
-      const response = await (instanse.post(`token/`, { email, password }))
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-      return response
+      try {
+         const response = await (instanse.post(`token/`, { email, password }))
+         return response
+      } catch (error) {
+         return error
+      }
    },
    async logout() {
       const response = await (instanse.post(`user/logout/blacklist/`, {
@@ -133,6 +135,6 @@ export const userApi = {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
       instanse.defaults.headers['Authorization'] = null;
-      return response
+      return response.data
    },
 }

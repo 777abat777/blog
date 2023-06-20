@@ -13,8 +13,7 @@ type Props = {
    excerpt: string
 }
 
-
-const Post = (props: Props) => {
+const Post = ({ slug, title, excerpt }: Props) => {
    let dispatch = useAppDispatch()
 
    const deletePost = (slug: string) => {
@@ -26,9 +25,9 @@ const Post = (props: Props) => {
 
    return (
       <div className={style.post}>
-         <NavLink to={props.slug}>{props.title}</NavLink>
-         <p>{props.excerpt}</p>
-         <button onClick={() => { deletePost(props.slug) }}>delete</button>
+         <NavLink to={slug}>{title}</NavLink>
+         <p>{excerpt}</p>
+         <button onClick={() => { deletePost(slug) }}>delete</button>
       </div>
    )
 }

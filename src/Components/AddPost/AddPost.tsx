@@ -17,12 +17,18 @@ const AddPost = (props: Props) => {
    const methods = useForm();
    const { handleSubmit } = methods
 
+   // type formData = {
+   //    title: string,
+   //    content: string,
+   //    status: "published" | "draft"
+   // }
+
    const onSubmit = (data: any) => {
       let excerpt = data.content.slice(0, 100) + '...'
       let status = "published"
       let slug = data.title.split(' ').join('-')
 
-      postApi.addPost(data.title, user.id, excerpt, data.content, status, slug, "new")
+      postApi.addPost(data.title, user.id, excerpt, data.content, data.status, slug, "new")
          .then((res) => {
             setComplete(true)
             dispatch(fetchPosts())
@@ -44,6 +50,11 @@ const AddPost = (props: Props) => {
                   <textarea placeholder="content" id="content" {...methods.register('content', { required: true })} />
                </p>
                <p>
+                  <label htmlFor="status">status:</label>
+                  <select id="status" {...methods.register('status', { required: true })}>
+                     <option value="published">published</option>
+                     <option value="draft">draft</option>
+                  </select>
                </p>
                {methods.formState.errors.title?.type === 'required' && <p >title is required</p>}
                <button>Добавить</button>

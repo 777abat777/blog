@@ -1,8 +1,10 @@
+import { SerializedError } from "@reduxjs/toolkit"
+
 // Define a type for the slice state
 export interface PostsStateInterface {
    posts: Array<PostType>,
    loading: boolean,
-   error: string | null | undefined,
+   error: SerializedError | null
 }
 
 export type PostType = {
