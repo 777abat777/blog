@@ -105,12 +105,12 @@ export const postApi = {
       }
    },
    async addPost(title: string, author: string | number, excerpt: string, content: string, status = "published", slug = title, category: "new" | "best" | "hot") {
-      const responce = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug, category }))
-      return responce
+      const response = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug, category }))
+      return response
    },
    async deletePost(slug: string) {
-      const responce = await (instanse.delete(`posts/${slug}`))
-      return responce
+      const response = await (instanse.delete(`posts/${slug}`))
+      return response
    }
 
 }
@@ -137,4 +137,11 @@ export const userApi = {
       instanse.defaults.headers['Authorization'] = null;
       return response.data
    },
+}
+
+export const commentApi = {
+   async addComment(post: number, body: string) {
+      const response = await (instanse.post(`comments/`, { post, body, owner: 2 }));
+      return response
+   }
 }
