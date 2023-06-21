@@ -6,7 +6,7 @@ import { decodeToken } from 'react-jwt'
 export interface userType {
    autorise: boolean,
    name: string,
-   id: number | string
+   id: number
    error: string | null | undefined,
 }
 

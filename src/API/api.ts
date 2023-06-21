@@ -140,8 +140,16 @@ export const userApi = {
 }
 
 export const commentApi = {
-   async addComment(post: number, body: string) {
-      const response = await (instanse.post(`comments/`, { post, body, owner: 2 }));
+   async addComment(post: number, body: string, owner: number) {
+      const response = await (instanse.post(`comments/`, { post, body, owner }));
+      return response
+   },
+   async deleteComment(id: number) {
+      const response = await (instanse.delete(`comments/${id}`));
+      return response
+   },
+   async editComment(id: number, body: string) {
+      const response = await (instanse.patch(`comments/${id}/`, { body }));
       return response
    }
 }

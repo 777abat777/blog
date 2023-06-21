@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { commentApi } from '../../../../API/api'
+import { useAppSelector } from '../../../../hook/hook'
 
 type Props = {
    postId: number
@@ -7,12 +8,14 @@ type Props = {
 }
 
 const AddComment = (props: Props) => {
+   let user = useAppSelector((state) => state.userReducer)
    let [commentValue, setCommentValue] = useState('')
 
    const addNewComment = () => {
-      commentApi.addComment(props.postId, commentValue).then(
+      commentApi.addComment(props.postId, commentValue, user.id).then(
          (res) => {
             props.getPost()
+            setCommentValue('')
          }
       )
 

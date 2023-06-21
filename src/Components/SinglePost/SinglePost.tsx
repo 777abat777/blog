@@ -34,7 +34,7 @@ const SinglePost = (props: Props) => {
          {postData ? <div className={style.singlePost}>
             <h1>{postData.title}</h1>
             <p>{postData.content}</p>
-            {postData.comments?.map((comment) => <Comment body={comment.body} id={comment.id} key={comment.id} created={comment.created} owner={comment.owner} />)}
+            {postData.comments?.map((comment) => <Comment getSinglePost={getSinglePost} body={comment.body} id={comment.id} key={comment.id} created={comment.created} author={comment.author} />)}
             <AddComment postId={postData.id} getPost={getSinglePost} />
          </div>
             : <h1>no data</h1>}
