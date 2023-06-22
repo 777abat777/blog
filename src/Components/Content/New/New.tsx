@@ -10,6 +10,7 @@ type Props = {
 
 const New = (props: Props) => {
    let loading = useAppSelector((state) => state.postReducer.loading)
+   console.log(props.posts)
    if (loading) return (
       <h1>loading...</h1>
    )
@@ -19,7 +20,7 @@ const New = (props: Props) => {
          <div className={style.post__container}>
             {props.posts?.map((post) => {
                return (
-                  <Post title={post.title} key={post.id} id={post.id} slug={post.slug} category={post.category} excerpt={post.excerpt} />)
+                  <Post image={post.image} title={post.title} key={post.id} id={post.id} slug={post.slug} category={post.category} excerpt={post.excerpt} />)
             })}
          </div>
       </div>

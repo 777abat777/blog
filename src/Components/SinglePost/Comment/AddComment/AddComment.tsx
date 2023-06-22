@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
 import { commentApi } from '../../../../API/api'
 import { useAppSelector } from '../../../../hook/hook'
+import { FormProvider, useForm } from 'react-hook-form'
 
 type Props = {
    postId: number
@@ -9,25 +9,33 @@ type Props = {
 
 const AddComment = (props: Props) => {
    let user = useAppSelector((state) => state.userReducer)
-   let [commentValue, setCommentValue] = useState('')
+   const methods = useForm();
+   const { handleSubmit } = methods
 
-   const addNewComment = () => {
-      commentApi.addComment(props.postId, commentValue, user.id).then(
-         (res) => {
+   const onSubmit = (data: any) => {
+      commentApi.addComment(props.postId, data.body, user.id, data.image[0])
+         .then((res) => {
             props.getPost()
-            setCommentValue('')
-         }
-      )
-
-
+         })
    }
 
    return (
       <div>
          <h1>add Comment</h1>
-         <textarea onChange={(e) => setCommentValue(e.target.value)} name="" id="" value={commentValue}></textarea>
-         <h2>{commentValue}</h2>
-         <button onClick={addNewComment}>add comment</button>
+         <FormProvider {...methods} >
+            <form onSubmit={handleSubmit(onSubmit)}>
+               <p>
+                  <label htmlFor="body">comment:</label>
+                  <textarea placeholder="body" id="body" {...methods.register('body', { required: true })} />
+               </p>
+               <p>
+                  <label htmlFor="image">image:</label>
+                  <input placeholder="image" id="image" type={"file"}  {...methods.register('image', { required: false })} />
+               </p>
+               {methods.formState.errors.body?.type === 'required' && <p >comment is required</p>}
+               <button>add comment</button>
+            </form>
+         </FormProvider>
       </div>
    )
 }

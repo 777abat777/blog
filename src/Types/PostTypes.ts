@@ -16,6 +16,7 @@ export type PostType = {
    status: "published" | "draft"
    slug: string,
    category: string
+   image: string
 }
 
 export type ResponseData = {

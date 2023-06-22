@@ -104,9 +104,14 @@ export const postApi = {
          return error
       }
    },
-   async addPost(title: string, author: string | number, excerpt: string, content: string, status = "published", slug = title, category: "new" | "best" | "hot") {
-      const response = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug, category }))
-      return response
+   async addPost(title: string, author: string | number, excerpt: string, content: string, status = "published", slug = title, category: "new" | "best" | "hot", image: any) {
+      if (image) {
+         const response = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug, category, image }, { headers: { "Content-Type": "multipart/form-data" } }))
+         return response
+      } else {
+         const response = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug, category }))
+         return response
+      }
    },
    async deletePost(slug: string) {
       const response = await (instanse.delete(`posts/${slug}`))
@@ -140,9 +145,14 @@ export const userApi = {
 }
 
 export const commentApi = {
-   async addComment(post: number, body: string, owner: number) {
-      const response = await (instanse.post(`comments/`, { post, body, owner }));
-      return response
+   async addComment(post: number, body: string, owner: number, image: any) {
+      if (image) {
+         const response = await (instanse.post(`comments/`, { post, body, owner, image }, { headers: { "Content-Type": "multipart/form-data" } }));
+         return response
+      } else {
+         const response = await (instanse.post(`comments/`, { post, body, owner }));
+         return response
+      }
    },
    async deleteComment(id: number) {
       const response = await (instanse.delete(`comments/${id}`));

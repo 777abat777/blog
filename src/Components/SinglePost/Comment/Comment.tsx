@@ -8,10 +8,14 @@ type Props = {
    author: string
    created: string
    getSinglePost: Function
+   image: string
 }
 
 
-const Comment = ({ body, author, created, id, getSinglePost }: Props) => {
+const Comment = ({ body, author, created, id, getSinglePost, image }: Props) => {
+
+
+
    const [edit, setEdit] = useState(false)
    const [commentBody, setCommentBody] = useState(body)
    const deletePost = (id: number) => {
@@ -41,6 +45,7 @@ const Comment = ({ body, author, created, id, getSinglePost }: Props) => {
             {!edit && <p> {body}</p>}
             {edit && <p> <input type="text" value={commentBody} autoFocus={true} onChange={(e) => { setCommentBody(e.target.value) }} onBlur={() => editPost(id)} /> </p>}
          </div>
+         <p>{image && <img src={image} alt="" />}</p>
          <p>{user === author && <button onClick={() => deletePost(id)}>delete</button>}</p>
          <p>{user === author && <button onClick={() => setEdit(true)}>edit</button>}</p>
       </div>

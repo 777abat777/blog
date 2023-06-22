@@ -17,18 +17,11 @@ const AddPost = (props: Props) => {
    const methods = useForm();
    const { handleSubmit } = methods
 
-   // type formData = {
-   //    title: string,
-   //    content: string,
-   //    status: "published" | "draft"
-   // }
-
    const onSubmit = (data: any) => {
       let excerpt = data.content.slice(0, 100) + '...'
-      let status = "published"
       let slug = data.title.split(' ').join('-')
 
-      postApi.addPost(data.title, user.id, excerpt, data.content, data.status, slug, "new")
+      postApi.addPost(data.title, user.id, excerpt, data.content, data.status, slug, "new", data.image[0])
          .then((res) => {
             setComplete(true)
             dispatch(fetchPosts())
@@ -44,6 +37,10 @@ const AddPost = (props: Props) => {
                <p>
                   <label htmlFor="title">title:</label>
                   <input placeholder="title" id="title" type="text"  {...methods.register('title', { required: true })} />
+               </p>
+               <p>
+                  <label htmlFor="image">image:</label>
+                  <input placeholder="image" id="image" type={"file"}  {...methods.register('image', { required: false })} />
                </p>
                <p>
                   <label htmlFor="content">content:</label>

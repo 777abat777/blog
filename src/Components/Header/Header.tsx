@@ -10,7 +10,7 @@ const Header = () => {
 
       <div className={style.header}>
          <div className={style.header__logo}>
-            <NavLink to='/'>
+            <NavLink to='/new'>
                <FontAwesomeIcon icon={faBlog} size="2x" />
                <p>Blog</p>
             </NavLink>
