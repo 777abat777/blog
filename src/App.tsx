@@ -1,5 +1,5 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Content from './Components/Content/Content';
 import Header from './Components/Header/Header';
@@ -46,11 +46,10 @@ function App() {
                   <Route path='login' element={<Login />} />
                   <Route path='registration' element={<Register />} />
                   <Route path='logout' element={<LogOut />} />
-                  <Route path='profile' element={<Profile />} />
+                  <Route path='profile/*' element={<Profile />} />
                   <Route path='addpost' element={<AddPost />} />
                </Routes>
             </div>
-
             <SideBar />
          </div>
       </div>

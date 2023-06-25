@@ -20,44 +20,47 @@
    a{
       color: white;
       display: flex;
-      column-gap: 20px;
+      padding: 0 25px;
       align-items: center;
       font-size: 25px;
       text-decoration: none;
-      transition: 0.3s;
+      transition: 0.5s;
       &:hover{
-         text-shadow: 0px 0px 5px black;
-         transform: scale(1.05);
+         background-color: white;
+         color: black;
       }
    }
 }
 
 .header__category {
    display: flex;
-   column-gap: 20px;
+   // column-gap: 20px;
    a{
       color: white;
       text-decoration: none;
       font-size: 20px;
-      transition: 0.3s;
+      transition: 0.5s;
+      line-height: 78px;
+      padding: 0 25px;
       &:hover{
-         text-shadow: 0px 0px 5px black;
-         transform: scale(1.05);
+         background-color: white;
+         color: black;
       }
    }  
 }
 
 .header__profile {
    display: flex;
-   column-gap: 20px;
    a{
       color: white;
       text-decoration: none;
       font-size: 20px;
-      transition: 0.3s;
+      transition: 0.5s;
+      line-height: 78px;
+      padding: 0 25px;
       &:hover{
-         text-shadow: 0px 0px 5px black;
-         transform: scale(1.05);
+         background-color: white;
+         color: black;
       }
    }  
 }

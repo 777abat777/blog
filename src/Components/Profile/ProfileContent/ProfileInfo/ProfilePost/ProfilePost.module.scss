@@ -1,0 +1,35 @@
+.post{
+   display: flex;
+   width: 70%;
+   height: 40px;
+   margin: 0 auto;
+   justify-content: space-between;
+   font-size: 20px;
+   border: solid white 1px;
+   padding: 5px;
+   border-radius: 5px;
+   &:not(:last-child) {margin-bottom: 10px;}
+   &__title{
+
+   }
+   &__category{
+      
+   }
+   &__edit{
+      display: flex;
+      width: 10%;
+      justify-content: space-around;
+      span{
+         display: flex;
+         padding: 3px;
+         justify-content: center;
+         align-items: center;
+         cursor: pointer;
+         user-select: none;
+         border-radius: 5px;
+      }
+      span:hover{
+         background-color: #8b8b8b;
+      }
+   }
+}

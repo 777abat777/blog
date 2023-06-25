@@ -1,0 +1,19 @@
+.profileNavigation{
+   display: flex;
+   justify-content: center;
+   height: 50px;
+   align-items: center;
+   a{
+      color: white;
+      padding: 0px 15px;
+      font-size: 20px;
+      line-height: 49px;
+      text-decoration: none;
+      transition: 0.5s;
+      &:hover{
+         background-color: white;
+         color: black;
+      }
+   }
+ 
+}

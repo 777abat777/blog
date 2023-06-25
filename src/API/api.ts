@@ -163,3 +163,23 @@ export const commentApi = {
       return response
    }
 }
+
+
+export const profileApi = {
+   async getUsers() {
+      try {
+         const response = await (instanse.get(`users`))
+         return response
+      } catch (error) {
+         return error
+      }
+   },
+   async getUser(user_name: string) {
+      try {
+         const response = await (instanse.get(`users/${user_name}`))
+         return response
+      } catch (error) {
+         return error
+      }
+   },
+}

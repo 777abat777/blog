@@ -4,6 +4,7 @@ import { postApi } from '../../API/api'
 import style from './SinglePost.module.scss'
 import Comment from './Comment/Comment'
 import AddComment from './Comment/AddComment/AddComment'
+import { useAppSelector } from '../../hook/hook'
 
 type Props = {}
 type postDataType = {
@@ -19,10 +20,9 @@ type postDataType = {
 }
 
 const SinglePost = (props: Props) => {
-
+   const autorise = useAppSelector((state) => state.userReducer.autorise)
    const { slug } = useParams()
    const [postData, setPostData] = useState<postDataType>()
-   console.log(postData)
    useEffect(() => {
       getSinglePost()
    }, [])
@@ -34,10 +34,12 @@ const SinglePost = (props: Props) => {
    return (
       <div >
          {postData ? <div className={style.singlePost}>
-            <h1>{postData.title}</h1>
-            <p>{postData.content}</p>
+            <div className={style.singlePost__content}>
+               <h2>{postData.title}</h2>
+               <p>{postData.content}</p>
+            </div>
             {postData.comments?.map((comment) => <Comment image={comment.image} getSinglePost={getSinglePost} body={comment.body} id={comment.id} key={comment.id} created={comment.created} author={comment.author} />)}
-            <AddComment postId={postData.id} getPost={getSinglePost} />
+            {autorise && <AddComment postId={postData.id} getPost={getSinglePost} />}
          </div>
             : <h1>no data</h1>}
 
