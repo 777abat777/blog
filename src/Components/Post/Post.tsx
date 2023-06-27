@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { postApi } from '../../API/api'
 import { useAppDispatch } from '../../hook/hook'
 import { fetchPosts } from '../../Redux/PostSlice/postsSlice'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import style from './Post.module.scss'
 import HeartOutlined from '@ant-design/icons/lib/icons/HeartOutlined'
 import HeartFilled from '@ant-design/icons/lib/icons/HeartFilled'
@@ -18,7 +18,7 @@ type Props = {
    image: string
 }
 
-const Post = ({ slug, title, excerpt, image }: Props) => {
+const Post = ({ slug, title, excerpt, image, category }: Props) => {
    const [like, setLike] = useState(false)
    const [dislike, setDislike] = useState(false)
    const [likeCount, setLikeCount] = useState(50);
@@ -48,7 +48,8 @@ const Post = ({ slug, title, excerpt, image }: Props) => {
          setDislikeCount(dislikeCount - 1)
       }
    }
-
+   let location = useLocation()
+   console.log(location)
 
    let dispatch = useAppDispatch()
 
@@ -58,11 +59,12 @@ const Post = ({ slug, title, excerpt, image }: Props) => {
             dispatch(fetchPosts())
          })
    }
+   let toNew = category + '/' + slug
 
    return (
       <div className={style.post}>
          <div className={style.post__body}>
-            <NavLink to={slug}>{title}</NavLink>
+            {location.pathname === "/" ? <NavLink to={toNew}>{title}</NavLink> : <NavLink to={slug}>{title}</NavLink>}
             <p>{excerpt}</p>
             {/* <button onClick={() => { deletePost(slug) }}>delete</button> */}
             <div className={style.post__rating}>

@@ -1,12 +1,14 @@
 import React from 'react'
+import { useAppSelector } from '../../../../hook/hook'
 
 type Props = {
-   user_name: string | undefined
+
 }
 
-const ProfileInfo = ({ user_name }: Props) => {
+const ProfileInfo = (props: Props) => {
+   const userName = useAppSelector(state => state.profileReducer.user_name)
    return (
-      <div>{user_name}</div>
+      <div>{userName}</div>
    )
 }
 

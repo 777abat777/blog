@@ -22,6 +22,7 @@ const Content = () => {
    return (
       <div>
          <Routes>
+            <Route path='/*' element={<New posts={postsNew} />} />
             <Route path='/new' element={<New posts={postsNew} />} />
             <Route path='/new/:slug' element={<SinglePost />} />
             <Route path='/hot' element={<Hot />} />

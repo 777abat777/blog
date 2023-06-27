@@ -26,6 +26,8 @@
       "react-redux": "^8.0.7",
       "react-router-dom": "^6.11.2",
       "react-scripts": "5.0.1",
+      "react-slugify": "^3.0.2",
+      "slugify": "^1.6.6",
       "typescript": "^4.9.5",
       "typescript-plugin-css-modules": "^5.0.1",
       "web-vitals": "^2.1.4"
@@ -57,6 +59,7 @@
       ]
    },
    "devDependencies": {
+      "@types/slug": "^5.0.3",
       "gh-pages": "^5.0.0",
       "sass": "^1.62.1"
    }

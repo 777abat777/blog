@@ -21,6 +21,7 @@ instanse.interceptors.response.use(
       return response;
    },
    async function (error) {
+      console.log(error)
       const originalRequest = error.config;
 
       if (typeof error.response === 'undefined') {
@@ -33,11 +34,15 @@ instanse.interceptors.response.use(
       }
 
       if (
-         error.response.status === 401 &&
+         error.response.status === 401
+         &&
          originalRequest.url === baseURL + 'token/refresh/'
       ) {
          window.location.href = '/login/';
          return Promise.reject(error);
+      }
+      if (error.response.statusText === 'Unauthorized') {
+         window.location.href = '/logout/'
       }
 
       if (
@@ -45,15 +50,15 @@ instanse.interceptors.response.use(
          error.response.status === 401 &&
          error.response.statusText === 'Unauthorized'
       ) {
+
          const refreshToken = localStorage.getItem('refresh_token');
+         // const refreshToken = localStorage.key(1);
 
          if (refreshToken) {
             const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
-
             // exp date in token is expressed in seconds, while now() returns milliseconds:
             const now = Math.ceil(Date.now() / 1000);
             console.log(tokenParts.exp);
-
             if (tokenParts.exp > now) {
                return instanse
                   .post('/token/refresh/', { refresh: refreshToken })
@@ -104,12 +109,21 @@ export const postApi = {
          return error
       }
    },
-   async addPost(title: string, author: string | number, excerpt: string, content: string, status = "published", slug = title, category: "new" | "best" | "hot", image: any) {
+   async addPost(title: string, author: string | number, excerpt: string, content: string, status = "published", slug: string, category: "new" | "best" | "hot", image: any) {
       if (image) {
          const response = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug, category, image }, { headers: { "Content-Type": "multipart/form-data" } }))
          return response
       } else {
          const response = await (instanse.post(`posts/`, { title, author, excerpt, content, status, slug, category }))
+         return response
+      }
+   },
+   async updatePost(title: string, author: string | number, excerpt: string, content: string, status = "published", slug = title, category: "new" | "best" | "hot", image: any, oldslug: string, published: any) {
+      if (image) {
+         const response = await (instanse.patch(`posts/${oldslug}/`, { title, author, excerpt, content, status, slug, category, image, published }, { headers: { "Content-Type": "multipart/form-data" } }))
+         return response
+      } else {
+         const response = await (instanse.patch(`posts/${oldslug}/`, { title, author, excerpt, content, status, slug, category, published }))
          return response
       }
    },
