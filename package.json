@@ -1,7 +1,7 @@
 {
    "name": "blog",
    "version": "0.1.0",
-   "homepage": "https://777abat777.github.io/blog",
+   "homepage": "blog-git-main-777abat777.vercel.app",
    "private": true,
    "dependencies": {
       "@ant-design/icons": "^5.1.4",
