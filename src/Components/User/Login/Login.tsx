@@ -32,6 +32,11 @@ const Login = (props: Props) => {
    return (
       <div className={style.login}>
          <h2>Login page</h2>
+         <div className={style.login__info}>
+            <h2>Тестовый аккаунт:</h2>
+            <p> <span>Email:</span> testUser@mail.ru</p>
+            <p><span>Password:</span> testuserpassword</p>
+         </div>
          <FormProvider {...methods} >
             <form onSubmit={handleSubmit(onSubmit)}>
                <FormEmail />

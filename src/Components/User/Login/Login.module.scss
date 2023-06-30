@@ -1,6 +1,23 @@
 .login{
    display: flex;
    flex-direction: column;
+   position: relative;
+   &__info{
+      width: 30%;
+      position: absolute;
+      right: 10px;
+      top:10px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      border: solid white 1px;
+      padding: 5px;
+      border-radius: 5px;
+      p{
+         display: flex;
+         justify-content: space-between;
+      }
+   }
    h2{
       text-align: center;
    }
