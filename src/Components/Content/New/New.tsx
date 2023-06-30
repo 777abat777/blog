@@ -10,13 +10,12 @@ type Props = {
 
 const New = (props: Props) => {
    let loading = useAppSelector((state) => state.postReducer.loading)
-   console.log(props.posts)
    if (loading) return (
-      <h1>loading...</h1>
+      <h2>loading...</h2>
    )
    return (
       <div className={style.new}>
-         <h1>New</h1>
+         <h2>New</h2>
          <div className={style.post__container}>
             {props.posts?.map((post) => {
                return (

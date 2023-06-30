@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { postApi } from '../../API/api'
-import { useAppDispatch } from '../../hook/hook'
-import { fetchPosts } from '../../Redux/PostSlice/postsSlice'
 import { NavLink, useLocation } from 'react-router-dom'
 import style from './Post.module.scss'
 import HeartOutlined from '@ant-design/icons/lib/icons/HeartOutlined'
@@ -35,7 +32,6 @@ const Post = ({ slug, title, excerpt, image, category }: Props) => {
       }
    }
    useEffect(() => {
-      console.log(likeCount);
       setRating(likeCount - dislikeCount)
    }, [likeCount, dislikeCount]);
 
@@ -49,24 +45,13 @@ const Post = ({ slug, title, excerpt, image, category }: Props) => {
       }
    }
    let location = useLocation()
-   console.log(location)
-
-   let dispatch = useAppDispatch()
-
-   const deletePost = (slug: string) => {
-      postApi.deletePost(slug)
-         .then((res) => {
-            dispatch(fetchPosts())
-         })
-   }
-   let toNew = category + '/' + slug
+   let tocategory = category + '/' + slug
 
    return (
       <div className={style.post}>
          <div className={style.post__body}>
-            {location.pathname === "/" ? <NavLink to={toNew}>{title}</NavLink> : <NavLink to={slug}>{title}</NavLink>}
+            {location.pathname === "/" ? <NavLink to={tocategory}>{title}</NavLink> : <NavLink to={slug}>{title}</NavLink>}
             <p>{excerpt}</p>
-            {/* <button onClick={() => { deletePost(slug) }}>delete</button> */}
             <div className={style.post__rating}>
                {!like && <div onClick={toggleDislike}>{!dislike && <DislikeOutlined />}{dislike && <DislikeFilled />}</div>}
                <p>{rating}</p>

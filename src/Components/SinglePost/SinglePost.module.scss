@@ -20,6 +20,13 @@
             font-size: 35px;
          }
       }
-     
    }
+}
+     
+.singlePost__comments{
+   padding: 0px 0px 0px 30px;
+   display: flex;
+   flex-direction: column;
+   row-gap: 30px;
+   width: 100%;
 }

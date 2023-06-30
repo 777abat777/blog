@@ -18,7 +18,9 @@ const AddComment = (props: Props) => {
       commentApi.addComment(props.postId, data.body, user.id, data.image[0])
          .then((res) => {
             props.getPost()
+            methods.reset()
          })
+
    }
 
    return (

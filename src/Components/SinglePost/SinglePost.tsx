@@ -38,7 +38,9 @@ const SinglePost = (props: Props) => {
                <h2>{postData.title}</h2>
                <p>{postData.content}</p>
             </div>
-            {postData.comments?.map((comment) => <Comment image={comment.image} getSinglePost={getSinglePost} body={comment.body} id={comment.id} key={comment.id} created={comment.created} author={comment.author} />)}
+            <div className={style.singlePost__comments}>
+               {postData.comments?.map((comment) => <Comment image={comment.image} getSinglePost={getSinglePost} body={comment.body} id={comment.id} key={comment.id} created={comment.created} author={comment.author} />)}
+            </div>
             {autorise && <AddComment postId={postData.id} getPost={getSinglePost} />}
          </div>
             : <h1>no data</h1>}

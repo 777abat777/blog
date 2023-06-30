@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios"
 
-const baseURL = 'http://127.0.0.1:8000/api/';
-// const baseURL = 'https://777abat777.pythonanywhere.com/api/';
+// const baseURL = 'http://127.0.0.1:8000/api/';
+const baseURL = 'https://777abat777.pythonanywhere.com/api/';
 
 export const instanse = axios.create({
    baseURL: baseURL,
